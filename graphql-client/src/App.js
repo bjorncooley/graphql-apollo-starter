@@ -17,12 +17,12 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.fireHelloWorldQuery();
+    this.helloWorld();
     this.getUserDataByID();
     this.getUserList();
   }
 
-  fireHelloWorldQuery = async () => {
+  helloWorld = async () => {
     const response = await client.query({
       query: gql`
         {
