@@ -21,7 +21,7 @@ const resolvers = {
   // we return only those that are active
   UserGroup: {
     users(obj, args, context, info) {
-      return obj.users.filter((u) => u.isActive);
+      return obj.users.filter(u => u.isActive);
     }
   }
 };
@@ -50,7 +50,7 @@ const typeDefs = gql`
 `;
 
 const getUserByID = (id) => {
-  return userList.find((user) => user.id === parseInt(id));
+  return userList.find(user => user.id === parseInt(id));
 }
 
 const getUserList = () => {
@@ -58,7 +58,7 @@ const getUserList = () => {
 }
 
 const getUserGroup = (id) => {
-  return userGroupList.find((group) => group.id === parseInt(id));
+  return userGroupList.find(group => group.id === parseInt(id));
 }
 
 const server = new ApolloServer({ typeDefs, resolvers });

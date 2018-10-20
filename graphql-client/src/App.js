@@ -107,11 +107,11 @@ class App extends Component {
     const userData = this.state.userData;
     return (
       <div>
-        <p>email: {userData.email}</p>
-        <p>firstName: {userData.firstName}</p>
-        <p>id: {userData.id}</p>
-        <p>lastName: {userData.lastName}</p>
-        <p>password: {userData.password}</p>
+        <p>email: { userData.email } </p>
+        <p>firstName: { userData.firstName } </p>
+        <p>id: { userData.id } </p>
+        <p>lastName: { userData.lastName } </p>
+        <p>password: { userData.password } </p>
       </div>
     );
   };
@@ -123,9 +123,9 @@ class App extends Component {
 
     return this.state.userList.map(user => (
       <div>
-        <p>{user.email}</p>
-        <p>{user.firstName}</p>
-        <p>{user.lastName}</p>
+        <p> { user.email } </p>
+        <p> { user.firstName } </p>
+        <p> { user.lastName } </p>
         <p>
           --
           <br />
@@ -139,7 +139,7 @@ class App extends Component {
       return null;
     }
 
-    return this.state.usersForGroup.map(user => <div>{user.email}</div>);
+    return this.state.usersForGroup.map(user => <div>{user.email } </div>);
   };
 }
 
