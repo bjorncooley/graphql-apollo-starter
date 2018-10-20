@@ -1,6 +1,8 @@
 const express = require('express');
 const { ApolloServer, gql } = require('apollo-server-express');
 
+const userList = require('./mockData');
+
 // Construct a schema, using GraphQL schema language
 const typeDefs = gql`
   type User {
@@ -13,27 +15,20 @@ const typeDefs = gql`
 
   type Query {
     hello: String
-    user: User
+    user(id: ID): User
   }
 `;
 
-const getUser = () => {
-  return {
-    email: 'user@example.com',
-    firstName: 'Jean-Luc',
-    id: 812312312,
-    lastName: 'Gray',
-    password: 'whatever'
-  }
+const getUserByID = (id) => {
+  return userList.find((user) => user.id === parseInt(id));
 }
 
-// Provide resolver functions for your schema fields
 const resolvers = {
   Query: {
     hello: () => 'Hello world!',
-    user: () => {
-      return getUser();
-    }
+    user: (obj, args, context, info) => {
+      return getUserByID(args.id);
+    },
   },
 };
 

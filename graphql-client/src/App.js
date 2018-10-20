@@ -36,7 +36,7 @@ class App extends Component {
     const response = await client.query({
       query: gql`
         {
-          user {
+          user(id: 2) {
             email
             firstName
             id
