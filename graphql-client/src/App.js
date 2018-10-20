@@ -20,6 +20,7 @@ class App extends Component {
     this.helloWorld();
     this.getUserDataByID();
     this.getUserList();
+    this.getUsersForGroup();
   }
 
   helloWorld = async () => {
@@ -65,6 +66,21 @@ class App extends Component {
     this.setState({ userList: response.data.userList });
   };
 
+  getUsersForGroup = async () => {
+    const response = await client.query({
+      query: gql`
+        {
+          userGroup(id: 321) {
+            users {
+              email
+            }
+          }
+        }
+      `
+    });
+    this.setState({ usersForGroup: response.data.userGroup.users });
+  };
+
   render() {
     return (
       <div className="App">
@@ -76,6 +92,8 @@ class App extends Component {
           {this.renderSingleUserData()}
           <h3>User list</h3>
           {this.renderUserList()}
+          <h3>Users for group</h3>
+          {this.renderUsersForGroup()}
         </div>
       </div>
     );
@@ -105,11 +123,23 @@ class App extends Component {
 
     return this.state.userList.map(user => (
       <div>
-        <p>email: {user.email}</p>
-        <p>firstName: {user.firstName}</p>
-        <p>lastName: {user.lastName}</p>
+        <p>{user.email}</p>
+        <p>{user.firstName}</p>
+        <p>{user.lastName}</p>
+        <p>
+          --
+          <br />
+        </p>
       </div>
     ));
+  };
+
+  renderUsersForGroup = () => {
+    if (!this.state.usersForGroup) {
+      return null;
+    }
+
+    return this.state.usersForGroup.map(user => <div>{user.email}</div>);
   };
 }
 
