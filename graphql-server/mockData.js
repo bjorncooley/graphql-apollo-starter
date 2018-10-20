@@ -1,5 +1,5 @@
 const user1 = {
-  email: 'user@example.com',
+  email: 'user1@example.com',
   firstName: 'Jean-Luc',
   id: 1,
   isActive: true,
@@ -8,7 +8,7 @@ const user1 = {
 };
 
 const user2 = {
-  email: 'user1@example.com',
+  email: 'user2@example.com',
   firstName: 'Mary',
   id: 2,
   isActive: true,
@@ -25,6 +25,15 @@ const user3 = {
   password: 'goboldly',
 };
 
+const user4 = {
+  email: 'user4@example.com',
+  firstName: 'Sam',
+  id: 4,
+  isActive: false,
+  lastName: 'Crusher',
+  password: 'digitalwatches',
+};
+
 const userList = [
   user1,
   user2,
@@ -34,7 +43,7 @@ const userList = [
 const userGroup1 = {
   id: 321,
   displayName: "First User Group",
-  users: [user1,user3],
+  users: [user1,user3,user4],
 }
 
 const userGroup2 = {
