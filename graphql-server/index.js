@@ -16,11 +16,16 @@ const typeDefs = gql`
   type Query {
     hello: String
     user(id: ID): User
+    userList: [User]
   }
 `;
 
 const getUserByID = (id) => {
   return userList.find((user) => user.id === parseInt(id));
+}
+
+const getUserList = () => {
+  return userList;
 }
 
 const resolvers = {
@@ -29,6 +34,7 @@ const resolvers = {
     user: (obj, args, context, info) => {
       return getUserByID(args.id);
     },
+    userList: () => getUserList(),
   },
 };
 

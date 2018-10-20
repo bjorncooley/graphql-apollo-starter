@@ -18,7 +18,8 @@ class App extends Component {
 
   componentDidMount() {
     this.fireHelloWorldQuery();
-    this.fireGetUserQuery();
+    this.getUserDataByID();
+    this.getUserList();
   }
 
   fireHelloWorldQuery = async () => {
@@ -32,7 +33,7 @@ class App extends Component {
     this.setState({ helloWorld: response.data.hello });
   };
 
-  fireGetUserQuery = async () => {
+  getUserDataByID = async () => {
     const response = await client.query({
       query: gql`
         {
@@ -49,18 +50,38 @@ class App extends Component {
     this.setState({ userData: response.data.user });
   };
 
+  getUserList = async () => {
+    const response = await client.query({
+      query: gql`
+        {
+          userList {
+            email
+            firstName
+            lastName
+          }
+        }
+      `
+    });
+    this.setState({ userList: response.data.userList });
+  };
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <p>{this.state.helloWorld}</p>
         </header>
-        <div className="data">{this.renderUserData()}</div>
+        <div className="data">
+          <h3>Data for single user</h3>
+          {this.renderSingleUserData()}
+          <h3>User list</h3>
+          {this.renderUserList()}
+        </div>
       </div>
     );
   }
 
-  renderUserData = () => {
+  renderSingleUserData = () => {
     if (!this.state.userData) {
       return null;
     }
@@ -75,6 +96,20 @@ class App extends Component {
         <p>password: {userData.password}</p>
       </div>
     );
+  };
+
+  renderUserList = () => {
+    if (!this.state.userList) {
+      return null;
+    }
+
+    return this.state.userList.map(user => (
+      <div>
+        <p>email: {user.email}</p>
+        <p>firstName: {user.firstName}</p>
+        <p>lastName: {user.lastName}</p>
+      </div>
+    ));
   };
 }
 
